@@ -8,26 +8,30 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Context as BlogContext } from "../context/BlogContext";
+import BlogPostForm from "../components/BlogPostForm";
 
-const CreateScreen = () => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+const CreateScreen = ({ navigation }) => {
   const { addBlogpost } = useContext(BlogContext);
 
   return (
-    <View>
-      <Text>Enter Title</Text>
-      <TextInput value={title} onChange={(text) => setTitle(text)} />
-      <Text>Enter Content</Text>
-      <TextInput value={content} onChange={(text) => setContent(text)} />
-      <Button title="Add Blog" onPress={() => addBlogpost(title, content)} />
-    </View>
+    <BlogPostForm
+      onSubmit={(title, content) => {
+        addBlogpost(title, content, () => navigation.navigate("Index"));
+      }}
+    />
   );
 };
 
 const styles = StyleSheet.create({
-  inputStyle: {},
-  lableStyle: {},
+  inputStyle: {
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: "black",
+    marginBottom: 15,
+    padding: 5,
+    margin: 5,
+  },
+  lableStyle: { fontSize: 20, marginBottom: 5, marginLeft: 5 },
 });
 
 export default CreateScreen;

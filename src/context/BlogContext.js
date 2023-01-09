@@ -1,5 +1,6 @@
 import { ActionSheetIOS } from "react-native";
 import createDataContext from "./createDataContext";
+import { EvilIcons } from "@expo/vector-icons";
 
 const blogReducer = (state, action) => {
   switch (action.type) {
@@ -20,8 +21,9 @@ const blogReducer = (state, action) => {
 };
 
 const addBlogpost = (dispatch) => {
-  return (title, content) => {
+  return (title, content, callback) => {
     dispatch({ type: "add_Blogpost", payload: { title, content } });
+    callback();
   };
 };
 
